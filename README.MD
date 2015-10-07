@@ -7,4 +7,4 @@ It is writted on Delphi XE2.
 ![Alt Screenshot](/ScreenShot.png?raw=true "Screenshot")
 
 ##Executable
-[Download GPathEditor](/GPathEditor.exe)
+[Download GPathEditor](/GPathEditor.exe?raw=true)
