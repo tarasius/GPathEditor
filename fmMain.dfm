@@ -5,16 +5,16 @@ object Form1: TForm1
   ClientHeight = 689
   ClientWidth = 793
   Color = clSilver
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
-  Font.Name = 'Tahoma'
+  Font.Name = 'Courier'
   Font.Style = []
   OldCreateOrder = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 120
-  TextHeight = 16
+  TextHeight = 13
   object Panel1: TPanel
     Left = 592
     Top = 0
@@ -48,6 +48,12 @@ object Form1: TForm1
       Height = 25
       Hint = 'Click to see how the final figure looks like'
       Caption = 'Finish'
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
@@ -60,15 +66,21 @@ object Form1: TForm1
       Height = 25
       Hint = 'Clear figure'
       Caption = 'Clear'
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 2
       OnClick = ButtonClearClick
     end
     object EditFigureName: TEdit
-      Left = 3
+      Left = 4
       Top = 113
-      Width = 171
+      Width = 170
       Height = 13
       Hint = 'Specify figure name here'
       BevelInner = bvNone
@@ -96,6 +108,12 @@ object Form1: TForm1
       Height = 25
       Hint = 'Copy source code to the clipboard'
       Caption = 'Copy'
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       ParentShowHint = False
       ShowHint = True
       TabOrder = 4
@@ -107,6 +125,12 @@ object Form1: TForm1
       Width = 195
       Height = 51
       Caption = ' Size '
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       TabOrder = 5
       object Label1: TLabel
         Left = 94

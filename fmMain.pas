@@ -70,7 +70,7 @@ implementation
 
 {$R *.dfm}
 
-uses clipbrd;
+uses clipbrd, math;
 
 procedure TForm1.ButtonFinishClick(Sender: TObject);
 begin
@@ -114,6 +114,7 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var h:integer;
 begin
   DrawPanel:=TCustomPanel.Create(self);
   DrawPanel.Parent:=form1;
@@ -124,6 +125,9 @@ begin
   PrepareMemo;
   caption:=FormCaption;
   DrawPanel.SetSize(144,168);
+  h:=form1.Canvas.TextHeight('A');
+  EditFigureName.Top:=MemoCode.Top + h + h div 8+1;
+  EditFigureName.Height:=h+3;
 end;
 
 { TCustomPanel }
@@ -158,6 +162,7 @@ end;
 procedure TCustomPanel.DrawGrid;
 var i, j :integer;
 begin
+  PatBlt(Canvas.Handle, 0, 0, ClientWidth, ClientHeight, WHITENESS);
   canvas.pen.Color:=clGray;
   canvas.pen.Width:=1;
   for I := 0 to width-1 do
@@ -189,7 +194,6 @@ procedure TCustomPanel.DrawPolygon;
 var scalepoints:TPointArray;
     i:integer;
 begin
-//  scalepoints := Copy(points, 0, MaxInt);
   setlength(scalepoints, length(points));
   for i := 0 to length(points)-1 do
   begin
@@ -270,7 +274,8 @@ begin
   SizeY:=y;
   Width:=x*scale;
   Height:=y*scale;
-  Form1.Width:=x*scale+22+Form1.Panel1.Width;
+  Form1.Width:=x*scale+28+Form1.Panel1.Width;
+  Form1.Height:=max(Form1.MemoCode.Height+Form1.GroupBox1.Height+Form1.ButtonFinish.Height+70, y*scale+22)
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
