@@ -45,8 +45,13 @@ type
     ButtonCopy: TButton;
     GroupBox1: TGroupBox;
     Label1: TLabel;
-    SpinEditSizeX: TSpinEdit;
-    SpinEditSizeY: TSpinEdit;
+    seSizeX: TSpinEdit;
+    seSizeY: TSpinEdit;
+    ButtonUndo: TButton;
+    GroupBox2: TGroupBox;
+    Label2: TLabel;
+    seOffsetX: TSpinEdit;
+    seOffsetY: TSpinEdit;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ButtonFinishClick(Sender: TObject);
@@ -54,7 +59,8 @@ type
     procedure EditFigureNameExit(Sender: TObject);
     procedure EditFigureNameKeyPress(Sender: TObject; var Key: Char);
     procedure ButtonCopyClick(Sender: TObject);
-    procedure SpinEditSizeXChange(Sender: TObject);
+    procedure seSizeXChange(Sender: TObject);
+    procedure ButtonUndoClick(Sender: TObject);
   private
     { Private declarations }
     DrawPanel:TCustomPanel;
@@ -85,8 +91,17 @@ begin
   end;
 end;
 
+procedure TForm1.ButtonUndoClick(Sender: TObject);
+begin
+  DrawPanel.finished:=false;
+  setlength(DrawPanel.points, length(DrawPanel.points)-1);
+  DrawPanel.paint;
+end;
+
 procedure TForm1.ButtonClearClick(Sender: TObject);
 begin
+  if MessageDlg('Are you sure you want to clear drawing?',mtConfirmation,[mbYes,mbNo],0)=mrNo then
+    exit;
   DrawPanel.finished:=false;
   DrawPanel.CurrentX:=-1;
   DrawPanel.CurrentY:=-1;
@@ -134,7 +149,8 @@ end;
 
 procedure TCustomPanel.AddToMemo(x, y: integer);
 begin
-  form1.MemoCode.Lines.Insert(form1.MemoCode.Lines.Count-2, format('    {%d,%d},',[x,y]));
+  form1.MemoCode.Lines.Insert(form1.MemoCode.Lines.Count-2, format('    {%d,%d},',
+        [x+form1.seOffsetX.Value,y+form1.seOffsetY.Value]));
   form1.MemoCode.Lines[2]:=format('= { %d,',[length(points)]);
 end;
 
@@ -220,7 +236,7 @@ end;
 procedure TCustomPanel.MouseMove(Shift: TShiftState; X, Y: Integer);
 begin
   inherited;
-  form1.Caption:=format('%d : %d', [x div scale,y div scale]);
+  form1.Caption:=format('%d : %d', [(x div scale)+form1.seOffsetX.Value,(y div scale)+form1.seOffsetY.Value]);
 end;
 
 procedure TCustomPanel.MouseUp(Button: TMouseButton; Shift: TShiftState; X,
@@ -291,9 +307,9 @@ begin
   EditFigureName.text:='Generated_Points';
 end;
 
-procedure TForm1.SpinEditSizeXChange(Sender: TObject);
+procedure TForm1.seSizeXChange(Sender: TObject);
 begin
-  DrawPanel.SetSize(SpinEditSizeX.Value, SpinEditSizeY.Value);
+  DrawPanel.SetSize(seSizeX.Value, seSizeY.Value);
 end;
 
 end.
